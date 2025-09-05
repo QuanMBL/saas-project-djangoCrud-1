@@ -1,3 +1,7 @@
+src\staticfiles\vendors
+
+local-cdn/
+
 .DS_Store
 
 

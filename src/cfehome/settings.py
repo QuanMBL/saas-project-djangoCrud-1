@@ -15,7 +15,13 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+""" 
+Path(__file__).resolve() = /home/quan/Du_an_Django_fullstack_0/src/project/settings.py
 
+.parent = /home/quan/Du_an_Django_fullstack_0/src/project (thư mục cha của file settings.py)
+
+.parent.parent = /home/quan/Du_an_Django_fullstack_0/src
+"""
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -149,6 +155,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Tạo đường dẫn gốc cho staticfile
+STATICFILES_BASE_DIR = BASE_DIR / "staticfiles"  # /home/quan/Du_an_Django_fullstack_0/src/staticfiles
+STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIR / "vendors"  # /home/quan/Du_an_Django_fullstack_0/src/staticfiles/vendors
+
+# sourve(s) for python manage.py collectstatic
+STATICFILES_DIRS =[
+    STATICFILES_BASE_DIR
+]
+
+#ouput for python manage.py collectstatic
+# pathlib.Path trong Python, dùng để lấy thư mục cha (folder chứa nó).
+STATIC_ROOT = BASE_DIR.parent/ "local-cdn"
+if not DEBUG: 
+    STATIC_ROOT = BASE_DIR / "prod-cdn"
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
