@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-import os
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,16 +21,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6-_w2bsu73!2wkbh3tt$+@m12*iu0#1b_bw%&!pzwf%q-%vae4'
+SECRET_KEY = config("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.environ.get("DEBUG")).lower() == "true" # Lấy giá trị biến môi trường DEBUG của hệ điều hành.
+# DEBUG = str(os.environ.get("DEBUG")).lower() == "true" # Lấy giá trị biến môi trường DEBUG của hệ điều hành.
+DEBUG = config("DJANGO_DEBUG", cast = bool)  # connect đến file .env core là config
 
 print("DEBUG",DEBUG,type(DEBUG))
 
 ALLOWED_HOSTS = [
     ".railway.app",
-    "localhost",
+    "localhost",    
     "127.0.0.1"
 ]
 
@@ -88,7 +89,31 @@ DATABASES = {
     }
 }
 
+CONN_MAX_AGE = config("CONN_MAX_AGE",cast = int, default = 30)
+DATABASES_URL = config("DATABASE_URL", default="", cast=str)
+if DATABASES_URL and "://" in DATABASES_URL:
+    import dj_database_url
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=DATABASES_URL,
+            conn_max_age=CONN_MAX_AGE,
+            conn_health_checks=True,
+        )
+    }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('PGDATABASE'),
+        'USER': config('PGUSER'),
+        'PASSWORD': config('PGPASSWORD'),
+        'HOST': config('PGHOST'),
+        'PORT': config('PGPORT', default=5432, cast=int),
+        'OPTIONS': {
+            'sslmode': 'require',   # nếu bạn deploy cloud như Railway / Heroku
+        },
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
