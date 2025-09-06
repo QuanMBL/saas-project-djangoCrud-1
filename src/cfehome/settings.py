@@ -22,7 +22,17 @@ Path(__file__).resolve() = /home/quan/Du_an_Django_fullstack_0/src/project/setti
 
 .parent.parent = /home/quan/Du_an_Django_fullstack_0/src
 """
+# Email config
+EMAIL_HOST = config("EMAIL_HOST", cast=str, default="smtp.gmail.com")
+EMAIL_PORT = config("EMAIL_PORT", cast=int, default=587)
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool, default=True)
+EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool, default=False)
 
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", cast=str, default="hungrypy@gmail.com")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", cast=str, default="Gmail App Password")
+
+ADMINS = [('Quân','quandeptrai5122004@gmail.com')]
+MANAGERS = ADMINS
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -31,7 +41,7 @@ SECRET_KEY = config("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = str(os.environ.get("DEBUG")).lower() == "true" # Lấy giá trị biến môi trường DEBUG của hệ điều hành.
-DEBUG = config("DJANGO_DEBUG", cast = bool)  # connect đến file .env core là config
+DEBUG = config("DJANGO_DEBUG", cast=bool, default=True)  # connect đến file .env core là config
 
 print("DEBUG",DEBUG,type(DEBUG))
 
@@ -54,6 +64,7 @@ INSTALLED_APPS = [
     
     'vistis',
     'commando',
+    'auth',
 ]
 
 MIDDLEWARE = [
@@ -98,7 +109,7 @@ DATABASES = {
 }
 
 CONN_MAX_AGE = config("CONN_MAX_AGE", cast=int, default=30)
-DATABASE_URL = config("DATABASE_URL", default="", cast=str)
+DATABASE_URL = config("DATABASE_URL", default="")
 
 if DATABASE_URL and "://" in DATABASE_URL:
     import dj_database_url
@@ -170,8 +181,16 @@ STATIC_ROOT = BASE_DIR.parent/ "local-cdn"
 if not DEBUG: 
     STATIC_ROOT = BASE_DIR / "prod-cdn"
 
+# < Django4.2 
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
