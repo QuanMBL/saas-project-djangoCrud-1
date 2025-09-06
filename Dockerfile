@@ -43,6 +43,13 @@ COPY ./src /code
 # Install the Python project requirements
 RUN pip install -r /tmp/requirements.txt
 
+# ARG → chỉ dùng trong lúc build image, không tồn tại khi container chạy.
+# ENV → tồn tại trong runtime container, Django, Python, hay Linux trong container đều đọc được.
+ARG DJANGO_DEBUG_SECRET_KEY
+ENV DJANGO_DEBUG_SECRET_KEY = ${DJANGO_DEBUG_SECRET_KEY}
+
+ARG DJANGO_DEBUG=0
+ENV DJANGO_DEBUG = ${DJANGO_DEBUG}
 # database isn't available during build
 # run any other commands that do not need the database
 # such as:

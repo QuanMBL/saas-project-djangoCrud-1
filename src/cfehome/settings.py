@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -96,31 +97,26 @@ DATABASES = {
     }
 }
 
-CONN_MAX_AGE = config("CONN_MAX_AGE",cast = int, default = 30)
-DATABASES_URL = config("DATABASE_URL", default="", cast=str)
-if DATABASES_URL and "://" in DATABASES_URL:
+CONN_MAX_AGE = config("CONN_MAX_AGE", cast=int, default=30)
+DATABASE_URL = config("DATABASE_URL", default="", cast=str)
+
+if DATABASE_URL and "://" in DATABASE_URL:
     import dj_database_url
     DATABASES = {
         "default": dj_database_url.config(
-            default=DATABASES_URL,
+            default=DATABASE_URL,
             conn_max_age=CONN_MAX_AGE,
             conn_health_checks=True,
         )
     }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('PGDATABASE'),
-        'USER': config('PGUSER'),
-        'PASSWORD': config('PGPASSWORD'),
-        'HOST': config('PGHOST'),
-        'PORT': config('PGPORT', default=5432, cast=int),
-        'OPTIONS': {
-            'sslmode': 'require',   # nếu bạn deploy cloud như Railway / Heroku
-        },
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
