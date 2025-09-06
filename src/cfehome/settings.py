@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'vistis',
+    'commando',
 ]
 
 MIDDLEWARE = [
@@ -158,6 +159,8 @@ STATIC_URL = 'static/'
 
 # Tạo đường dẫn gốc cho staticfile
 STATICFILES_BASE_DIR = BASE_DIR / "staticfiles"  # /home/quan/Du_an_Django_fullstack_0/src/staticfiles
+
+STATICFILES_BASE_DIR.mkdir(exist_ok= True, parents=True)
 STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIR / "vendors"  # /home/quan/Du_an_Django_fullstack_0/src/staticfiles/vendors
 
 # sourve(s) for python manage.py collectstatic
