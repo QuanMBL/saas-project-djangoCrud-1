@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     
     'vistis',
     'commando',
-    'auth',
+    'accounts',  # Đúng tên thư mục app của bạn
 ]
 
 MIDDLEWARE = [

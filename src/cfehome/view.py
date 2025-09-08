@@ -12,7 +12,7 @@ def home_page_view(request,*args, **kwargs):
     
     # objects ở đây cho tương tác với database
     queryset= PageVist.objects.all() # tổng thể      vào trang bao nhiêu lần
-    html_templates= "home.html"
+    html_templates= "base.html"
     #số lần vào trang request 
     qs= PageVist.objects.filter(path=request.path)
     my_context = {

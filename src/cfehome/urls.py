@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .view import home_page_view
+from accounts import views as auth_views
 
 
 #đường dẫn chính \
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home_page_view),
+    path('login/',auth_views.login_view)
 ]

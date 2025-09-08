@@ -10,11 +10,8 @@
     {% include "nav/navbar.html" %}
     <h1>Hi bro</h1>
 
+    {% block content %}{% endblock content %}
 
-    <p>{{page_title}}</p>
-
-    <p>{{page_visit}}</p>
-    <p>{{page_total}}</p>
     {% include "base/js.html" %}
 
 </body>
