@@ -4,6 +4,7 @@ from vistis.models import PageVist
 from django.shortcuts import render
 import pathlib 
 
+
 # pathlib là module chuẩn có thể thay thế cho os.Path
 #  đường dẫn tuyệt đối đang chạy
 this_dir = pathlib.Path(__file__).resolve().parent

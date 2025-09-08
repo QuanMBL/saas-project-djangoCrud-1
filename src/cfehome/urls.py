@@ -20,9 +20,12 @@ from .view import home_page_view
 from accounts import views as auth_views
 
 
-#đường dẫn chính \
+#đường dẫn chính 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home_page_view),
-    path('login/',auth_views.login_view)
+    path('login/',auth_views.login_view),
+    path('register/',auth_views.register_view),
 ]
+
+
