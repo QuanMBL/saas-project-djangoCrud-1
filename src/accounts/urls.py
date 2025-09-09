@@ -1,8 +1,10 @@
 """ from django.urls import path
+from . import views
 
 
 
 urlpatterns = [
-    path("")
+    # ...existing urls...
+    path('profile/', views.profile_view, name='profile'),
 ]
  """
