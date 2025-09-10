@@ -70,7 +70,11 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
+    
+    "allauth_ui",
+    "widget_tweaks",
+    "slippers",
+        
 ]
 
 MIDDLEWARE = [
@@ -188,7 +192,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Tạo đường dẫn gốc cho staticfile
 STATICFILES_BASE_DIR = BASE_DIR / "staticfiles"  # /home/quan/Du_an_Django_fullstack_0/src/staticfiles
@@ -223,3 +227,5 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+ALLAUTH_UI_THEME = "light"
+# 4.18
