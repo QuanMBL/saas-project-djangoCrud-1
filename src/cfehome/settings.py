@@ -66,7 +66,8 @@ INSTALLED_APPS = [
     'vistis',
     'commando',
     'accounts',
-
+    'profiles',
+    
     # allauth trước
     'allauth',
     'allauth.account',
@@ -204,7 +205,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Tạo đường dẫn gốc cho staticfile
-STATICFILES_BASE_DIR = BASE_DIR / "staticfiles"  # /home/quan/Du_an_Django_fullstack_0/src/staticfiles
+""" STATICFILES_BASE_DIR = BASE_DIR / "staticfiles"  # /home/quan/Du_an_Django_fullstack_0/src/staticfiles
 
 STATICFILES_BASE_DIR.mkdir(exist_ok= True, parents=True)
 STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIR / "vendors"  # /home/quan/Du_an_Django_fullstack_0/src/staticfiles/vendors
@@ -213,7 +214,7 @@ STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIR / "vendors"  # /home/quan/Du_an_Dj
 STATICFILES_DIRS =[
     STATICFILES_BASE_DIR
 ]
-
+ """
 #ouput for python manage.py collectstatic
 # pathlib.Path trong Python, dùng để lấy thư mục cha (folder chứa nó).
 STATIC_ROOT = BASE_DIR.parent/ "local-cdn"
