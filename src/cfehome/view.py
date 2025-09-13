@@ -3,6 +3,8 @@ from django.urls import path
 from vistis.models import PageVist
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+
 import pathlib 
 
 
@@ -46,4 +48,11 @@ def pw_protected_view(request,*args, **kwargs):
 # login_required: Người dùng buột phải đăng nhập mới được vào trang này 
 @login_required
 def user_only_view(request,*args, **kwargs):
+    # print(request.user.is_staff)
     return render(request, "protected/onlyview.html",{})
+
+
+# staff_member_required: Người dùng buột phải là nhân viên mới được vào trang này
+@staff_member_required
+def staff_only_view(request,*args, **kwargs):
+    return render(request, "protected/staffview.html",{})

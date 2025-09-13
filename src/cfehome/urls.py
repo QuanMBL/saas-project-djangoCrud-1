@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .view import home_page_view, pw_protected_view, user_only_view
+from .view import home_page_view, pw_protected_view, user_only_view,staff_only_view
 from accounts import views as auth_views
 
 
@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),    # allauth + allauth_ui sẽ lo login/logout
     path("protected/",pw_protected_view ), # pw_protected_view là hàm view
     path("protected/user-only", user_only_view), # user_only_view là hàm view
+    path("protected/staff-only", staff_only_view),
 ]
 
 

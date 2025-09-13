@@ -238,4 +238,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLAUTH_UI_THEME = "light"
 # 4.18
-
