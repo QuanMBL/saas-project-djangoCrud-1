@@ -62,18 +62,23 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+     # apps của bạn
     'vistis',
     'commando',
-    'accounts',  # Đúng tên thư mục app của bạn
-    
-    # install auth
+    'accounts',
+
+    # allauth trước
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    
-    "allauth_ui",
-    "widget_tweaks",
-    "slippers",
+    'allauth.socialaccount.providers.github',
+
+    # để cuối cùng để override template
+    'allauth_ui',
+
+    # phụ trợ
+    'widget_tweaks',
+    'slippers',
         
 ]
 
@@ -173,8 +178,12 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-# Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {}
+# Provider specific settings (NHÀ CUNG CẤP TÀI KHOẢN XÃ HỘI)
+SOCIALACCOUNT_PROVIDERS = {
+    "github":{
+        "VERIFIED_EMAIL": True
+    }
+}
 
 
 # Internationalization
@@ -229,3 +238,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLAUTH_UI_THEME = "light"
 # 4.18
+
