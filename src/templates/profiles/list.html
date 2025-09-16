@@ -1,0 +1,15 @@
+{% comment %} {% block head_title %}Users-{{block.super}}{% endblock head_title %} {% endcomment %}
+
+{% block content %}
+<h1 class= "text-lg font-medium">User</h1>
+
+<div>
+    {% for instance in object_list %}
+        <li><a href="/profiles/{{instance.username}}">{{instance.username}}</a></li>
+        
+    
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,8 @@
+{% block content %}
+<h1>{{ object.username }}</h1>
+{% if owner %}
+    <p>Đây là trang của bạn.</p>
+{% else %}
+    <p>Bạn đang xem trang của người khác.</p>
+{% endif %}
+{% endblock content %}
