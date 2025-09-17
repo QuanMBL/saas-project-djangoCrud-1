@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'commando',
     'accounts',
     'profiles',
-    
+    'subscriptions',
     # allauth trước
     'allauth',
     'allauth.account',
