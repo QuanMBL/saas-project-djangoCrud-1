@@ -53,3 +53,4 @@ def profile_detail_view(request, username=None, *args, **kwargs):
         "owner": is_me,
     }
     return render(request, "profiles/detail.html", context)
+
